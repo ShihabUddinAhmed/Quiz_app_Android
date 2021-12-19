@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background"
+    tools:context=".DifficultyLevel">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/difficultyLevel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-39dp"
+        android:text="How do you think about yourself?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/difficultyLevel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-113dp"
+        android:text="Start Quiz" />
+
+    <RadioGroup
+        android:id="@+id/difficultyLevel"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="213dp"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="309dp">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Expert" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beginner " />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="142dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+</RelativeLayout>
