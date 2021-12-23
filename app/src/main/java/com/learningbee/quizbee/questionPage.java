@@ -1,5 +1,6 @@
 package com.learningbee.quizbee;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,7 +14,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class questionPage extends AppCompatActivity {
     private TextView textViewQuestion;
     private TextView textViewScore;
     private TextView textViewHint;
-    private TextView textViewFoot;
+    //private TextView textViewFoot;
     private RadioGroup rbgroup;
     private RadioButton rb1;
     private RadioButton rb2;
@@ -41,6 +41,11 @@ public class questionPage extends AppCompatActivity {
     private boolean answered;
     private int level;
 
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog alertDialog;
+    private TextView textViewOnDialog;
+    private Button popupOK;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +55,8 @@ public class questionPage extends AppCompatActivity {
         textViewScore = findViewById(R.id.textView9);
         textViewHint = findViewById(R.id.textView7);
         textViewHint.setText(" ");
-        textViewFoot = findViewById(R.id.textView10);
-        textViewFoot.setText(" ");
+        //textViewFoot = findViewById(R.id.textView10);
+        //textViewFoot.setText(" ");
         rbgroup = findViewById(R.id.ansOptions);
         rb1 = findViewById(R.id.radioButton4);
         rb2 = findViewById(R.id.radioButton5);
@@ -116,12 +121,33 @@ public class questionPage extends AppCompatActivity {
         showSolution();
     }
 
+    private void showSolutionPopUp(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View solutionPopUp = getLayoutInflater().inflate(R.layout.showsolutionpopup, null);
+        textViewOnDialog = (TextView) solutionPopUp.findViewById(R.id.solutionText);
+        popupOK = (Button) solutionPopUp.findViewById(R.id.gotitbutton);
+
+        dialogBuilder.setView(solutionPopUp);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        textViewOnDialog.setText(currentQ.getAnswerFootnote());
+        popupOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //defining the dismiss
+                alertDialog.dismiss();
+            }
+        });
+    }
+
     private void showSolution(){
         rb1.setTextColor(Color.RED);
         rb2.setTextColor(Color.RED);
         rb3.setTextColor(Color.RED);
         rb4.setTextColor(Color.RED);
-        textViewFoot.setText(currentQ.getAnswerFootnote());
+        //textViewFoot.setText(currentQ.getAnswerFootnote());
+        showSolutionPopUp();
         switch (currentQ.getCorrectOption()){
             case 1:
                 rb1.setTextColor(Color.GREEN);
@@ -150,7 +176,7 @@ public class questionPage extends AppCompatActivity {
         rb3.setTextColor(textColorRbGroup);
         rb4.setTextColor(textColorRbGroup);
         rbgroup.clearCheck();
-        textViewFoot.setText(" ");
+        //textViewFoot.setText(" ");
 
         if (questionCounter < 10 && questionCounter < questionCountTotal){
             currentQ = questionList.get(questionCounter);
